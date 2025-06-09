@@ -55,3 +55,5 @@ dispatch:
     search_order: ["tsql_utils", "dbt_date"]
 on-run-end:
   - "{{ dbt_observability.upload_results(results) }}"
+flags:
+  use_materialization_v2: True
