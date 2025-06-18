@@ -41,7 +41,7 @@ models:
               to_field: date_key
     columns:
       - name: fact_sales_key
-        data_type: text
+        data_type: string
         meta:
           hidden: true
         constraints:
@@ -49,7 +49,7 @@ models:
           - type: primary_key
             warn_unenforced: false
       - name: customer_key
-        data_type: text
+        data_type: string
         meta:
           hidden: true
         constraints:
@@ -60,7 +60,7 @@ models:
               to: ref('dim_customer')
               field: customer_key
       - name: order_key
-        data_type: text
+        data_type: string
         meta:
           hidden: true
         constraints:
@@ -70,7 +70,7 @@ models:
               to: ref('dim_order')
               field: order_key
       - name: product_key
-        data_type: text
+        data_type: string
         meta:
           hidden: true
         constraints:
@@ -80,7 +80,7 @@ models:
               to: ref('dim_product')
               field: product_key
       - name: date_key
-        data_type: text
+        data_type: string
         meta:
           hidden: true
         constraints:
@@ -157,7 +157,7 @@ models:
       display_index: 4
     columns:
       - name: customer_key
-        data_type: text
+        data_type: string
         meta:
           label: customer_key
           hidden: true
@@ -166,11 +166,11 @@ models:
           - type: primary_key
             warn_unenforced: false
       - name: customer_code
-        data_type: text
+        data_type: string
         meta:
           label: Customer Id
       - name: customer_name
-        data_type: text
+        data_type: string
         tags:
           - pii_column
         meta:
@@ -179,35 +179,35 @@ models:
             - Customer
             - Who
       - name: address
-        data_type: text
+        data_type: string
         meta:
           label: Address
       - name: postal_code
-        data_type: text
+        data_type: string
         meta:
           label: Postal Code
       - name: country
-        data_type: text
+        data_type: string
         meta:
           label: Country
       - name: latitude
-        data_type: text
+        data_type: string
         meta:
           label: Latitude
       - name: longitude
-        data_type: text
+        data_type: string
         meta:
           label: Longitude
       - name: contact_name
-        data_type: text
+        data_type: string
         meta:
           label: Contact Name
       - name: phone
-        data_type: text
+        data_type: string
         meta:
           label: Phone
       - name: email
-        data_type: text
+        data_type: string
         meta:
           label: Email
 
@@ -221,7 +221,7 @@ models:
       display_index: 2
     columns:
       - name: order_key
-        data_type: text
+        data_type: string
         meta:
           label: order_key
           hidden: true
@@ -243,7 +243,7 @@ models:
         meta:
           label: Order Date
       - name: status
-        data_type: text
+        data_type: string
         description: "Status can be one of the following values: 'Cancelled', 'Delivered', 'Shipped'"
         meta:
           label: Order Status
@@ -266,7 +266,7 @@ models:
       display_index: 3
     columns:
       - name: product_key
-        data_type: text
+        data_type: string
         meta:
           hidden: true
         constraints:
@@ -274,18 +274,18 @@ models:
           - type: primary_key
             warn_unenforced: false
       - name: product_code
-        data_type: text
+        data_type: string
         meta:
           label: Product Code
       - name: product_name
-        data_type: text
+        data_type: string
         meta:
           label: Product Name
           synonyms: # for business searching and natural language processing
             - Product
             - What
       - name: product_category
-        data_type: text
+        data_type: string
         meta:
           label: Product Category
           synonyms: # for business searching and natural language processing
@@ -320,7 +320,7 @@ models:
       display_index: 5
     columns:
       - name: date_key
-        data_type: text
+        data_type: string
         meta:
           label: date_key
           hidden: true
@@ -364,12 +364,12 @@ models:
           hidden: true
           label: Day Of Week
       - name: day_of_week_name
-        data_type: text
+        data_type: string
         meta:
           hidden: true
           label: Day Of Week Name
       - name: day_of_week_name_short
-        data_type: text
+        data_type: string
         meta:
           hidden: true
           label: Day Of Week Name Short
@@ -446,11 +446,11 @@ models:
         meta:
           label: Month Num
       - name: month_name
-        data_type: text
+        data_type: string
         meta:
           label: Month Name
       - name: month_name_short
-        data_type: text
+        data_type: string
         meta:
           label: Month Name Short
       - name: date_month # month_start_date
