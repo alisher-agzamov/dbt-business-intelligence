@@ -160,5 +160,3 @@ saved_queries:
       - name: order_metrics
         config:
           export_as: table # Options available: table, view
-          schema: main_alisher # Optional - defaults to deployment schema
-          alias: order_summary # Optional - defaults to Export name
