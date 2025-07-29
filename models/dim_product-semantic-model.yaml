@@ -1,0 +1,17 @@
+name: dim_product
+label: Product
+description: Detailed information about products in the following categories:\n\*
+  Classic Cars\n\* Motorcycles\n\* Planes\n\* Ships\n\* Trains\n\* Trucks and Buses\n\*
+  Vintage Cars
+model: dim_product
+entities:
+- name: product
+  type: primary
+  expr: product_key
+dimensions:
+- name: product_category_dim
+  type: categorical
+  expr: product_category
+- name: is_aviation_order
+  type: categorical
+  expr: case when product_category = 'Aviaiton' then 1 else 0 end
