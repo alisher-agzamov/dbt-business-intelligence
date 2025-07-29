@@ -1,0 +1,157 @@
+semantic_models:
+  - name: dim_customer
+    label: Customer
+    description: Customer (sometimes known as a client, buyer, or purchaser) is the recipient
+      of a good, service, product or an idea - obtained from a seller, vendor, or supplier
+      via a financial transaction or exchange for money or some other valuable consideration.
+      [Click here](https://en.wikipedia.org/wiki/Customer) for more information.
+    model: ref('dim_customer')
+    entities:
+    - name: customer
+      type: primary
+      expr: customer_key
+  - name: dim_order
+    label: Order
+    description: Detailed information about a customer purchase of product(s) such as
+      order date and status
+    model: ref('dim_order')
+    entities:
+    - name: order
+      type: primary
+      expr: order_key
+    dimensions:
+    - name: order_status_dim
+      type: categorical
+      expr: status
+    - name: is_cancelled_order
+      type: categorical
+      expr: case when status = 'Cancelled' then 1 else 0 end
+  - name: dim_product
+    label: Product
+    description: Detailed information about products in the following categories:\n\*
+      Classic Cars\n\* Motorcycles\n\* Planes\n\* Ships\n\* Trains\n\* Trucks and Buses\n\*
+      Vintage Cars
+    model: ref('dim_product')
+    entities:
+    - name: product
+      type: primary
+      expr: product_key
+    dimensions:
+    - name: product_category_dim
+      type: categorical
+      expr: product_category
+    - name: is_aviation_order
+      type: categorical
+      expr: case when product_category = 'Aviaiton' then 1 else 0 end
+  - name: fact_sales
+    label: Sales Fact
+    defaults:
+      agg_time_dimension: date_day
+    description: '|  Metric  |              Definition              |\n|----------|--------------------------------------|\n|
+      quantity | Sum of quantity sold                 |\n| price    | Average price for
+      an ordered product |\n| sales    | Sum of total sales revenue           |\n| target   |
+      Sum of target sales revenue          |\n'
+    model: ref('fact_sales')
+    entities:
+    - name: fact_sales_key
+      type: primary
+    - name: customer
+      type: foreign
+      expr: customer_key
+    - name: order
+      type: foreign
+      expr: order_key
+    - name: product
+      type: foreign
+      expr: product_key
+    - name: date
+      type: foreign
+      expr: date_key
+    measures:
+    - name: price
+      label: Price
+      agg_time_dimension: date_day
+      expr: price
+      create_metric: true
+      description: Price paid on this order
+      agg: average
+    - name: quantity
+      label: Quantity
+      agg_time_dimension: date_day
+      expr: quantity
+      create_metric: true
+      agg: sum
+    - name: sales
+      label: Sales
+      agg_time_dimension: date_day
+      expr: sales
+      create_metric: true
+      description: The total revenue for each order.
+      agg: sum
+    - name: target
+      label: Target
+      agg_time_dimension: date_day
+      expr: target
+      create_metric: true
+      description: Distinct count of customers placing orders
+      agg: sum
+    - name: row_count
+      label: Rowcount
+      agg_time_dimension: date_day
+      expr: 1
+      create_metric: true
+      agg: sum
+    - name: customer_count
+      label: Customer Count
+      agg_time_dimension: date_day
+      expr: customer_key
+      create_metric: true
+      description: Distinct count of customers
+      agg: count_distinct
+    - name: product_count
+      label: Product Count
+      agg_time_dimension: date_day
+      expr: product_key
+      create_metric: true
+      description: Distinct count of products
+      agg: count_distinct
+    - name: order_count
+      label: Order Count
+      agg_time_dimension: date_day
+      expr: order_key
+      create_metric: true
+      description: Distinct count of orders
+      agg: count_distinct
+    - name: sales_to_target
+      label: Sales to Target %
+      agg_time_dimension: date_day
+      expr: sales / target
+      create_metric: true
+      description: Percentage of actual sales to target sales
+      agg: average
+    dimensions:
+    - name: date_day
+      type_params:
+        time_granularity: day
+      type: time
+saved_queries:
+  - name: order_metrics
+    description: Relevant order metrics
+    query_params:
+      metrics:
+        - sales_to_target
+        - order_count
+        - product_count
+        - customer_count
+        - sales
+        - target
+      group_by:
+        - TimeDimension('fact_sales_key__date_day', 'day')
+        # where:
+        #   - "{{TimeDimension('fact_sales_key__date_day')}} > current_timestamp - interval '1 month'"
+    exports:
+      - name: order_metrics
+        config:
+          export_as: table # Options available: table, view
+          schema: main_alisher # Optional - defaults to deployment schema
+          alias: order_summary # Optional - defaults to Export name
