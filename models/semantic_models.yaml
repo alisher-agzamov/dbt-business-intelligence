@@ -72,61 +72,61 @@ semantic_models:
       label: Price
       agg_time_dimension: date_day
       expr: price
-      create_metric: false
+      create_metric: true
       description: Price paid on this order
       agg: average
     - name: quantity
       label: Quantity
       agg_time_dimension: date_day
       expr: quantity
-      create_metric: false
+      create_metric: true
       agg: sum
     - name: sales
       label: Sales
       agg_time_dimension: date_day
       expr: sales
-      create_metric: false
+      create_metric: true
       description: The total revenue for each order.
       agg: sum
     - name: target
       label: Target
       agg_time_dimension: date_day
       expr: target
-      create_metric: false
+      create_metric: true
       description: Distinct count of customers placing orders
       agg: sum
     - name: row_count
       label: Rowcount
       agg_time_dimension: date_day
       expr: 1
-      create_metric: false
+      create_metric: true
       agg: sum
     - name: customer_count
       label: Customer Count
       agg_time_dimension: date_day
       expr: customer_key
-      create_metric: false
+      create_metric: true
       description: Distinct count of customers
       agg: count_distinct
     - name: product_count
       label: Product Count
       agg_time_dimension: date_day
       expr: product_key
-      create_metric: false
+      create_metric: true
       description: Distinct count of products
       agg: count_distinct
     - name: order_count
       label: Order Count
       agg_time_dimension: date_day
       expr: order_key
-      create_metric: false
+      create_metric: true
       description: Distinct count of orders
       agg: count_distinct
     - name: sales_to_target
       label: Sales to Target %
       agg_time_dimension: date_day
       expr: sales / target
-      create_metric: false
+      create_metric: true
       description: Percentage of actual sales to target sales
       agg: average
     dimensions:
