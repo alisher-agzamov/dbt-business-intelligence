@@ -3,7 +3,7 @@ semantic_models:
     label: Order
     description: Detailed information about a customer purchase of product(s) such as
       order date and status
-    model: dim_order
+    model: ref('dim_order')
     entities:
     - name: order
       type: primary

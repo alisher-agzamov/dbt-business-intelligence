@@ -4,7 +4,7 @@ semantic_models:
     description: Detailed information about products in the following categories:\n\*
       Classic Cars\n\* Motorcycles\n\* Planes\n\* Ships\n\* Trains\n\* Trucks and Buses\n\*
       Vintage Cars
-    model: dim_product
+    model: ref('dim_product')
     entities:
     - name: product
       type: primary

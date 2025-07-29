@@ -7,7 +7,7 @@ semantic_models:
       quantity | Sum of quantity sold                 |\n| price    | Average price for
       an ordered product |\n| sales    | Sum of total sales revenue           |\n| target   |
       Sum of target sales revenue          |\n'
-    model: fact_sales
+    model: ref('fact_sales')
     entities:
     - name: fact_sales_key
       type: primary
