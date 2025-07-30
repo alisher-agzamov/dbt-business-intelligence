@@ -1,17 +1,17 @@
 semantic_models:
-  - name: dim_order
-    label: Order
-    description: Detailed information about a customer purchase of product(s) such as
-      order date and status
-    model: ref('dim_order')
-    entities:
-    - name: order
-      type: primary
-      expr: order_key
-    dimensions:
-    - name: order_status_dim
-      type: categorical
-      expr: status
-    - name: is_cancelled_order
-      type: categorical
-      expr: case when status = 'Cancelled' then 1 else 0 end
+- name: dim_order
+  label: Order
+  description: Detailed information about a customer purchase of product(s) such as
+    order date and status
+  model: ref('dim_order')
+  entities:
+  - name: order
+    type: primary
+    expr: order_key
+  dimensions:
+  - name: order_status_dim
+    type: categorical
+    expr: status
+  - name: is_cancelled_order
+    type: categorical
+    expr: case when status = 'Cancelled' then 1 else 0 end
