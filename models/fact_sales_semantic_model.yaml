@@ -90,3 +90,18 @@ semantic_models:
     type_params:
       time_granularity: day
     type: time
+
+metrics:
+  - name: sales_to_target_raw_metric
+    label: Sales to Target Ratio
+    type: simple
+    description: Percentage of actual sales to target sales
+    type_params:
+      measure: sales_to_target
+    meta:
+      format:
+        type: percent
+        decimalPlaces: 1
+        suffix: "%"
+      synonyms:
+        - Sales Coverage Ratio
